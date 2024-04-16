@@ -47,63 +47,66 @@ Este proyecto utiliza la librería `python-telegram-bot` para interactuar con la
 
 ## Código
 
+```python
 import logging
 import re
 
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
-# Habilitar registros
+Habilitar registros
+
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
-# Expresión regular para detectar preguntas y consultas de Uber
+Expresión regular para detectar preguntas y consultas de Uber
+
 expresion_consulta = re.compile(r"\b(qué|cuándo|dónde|por qué|cómo)\b|\bUber de (\w+) a (\w+) el (\d{1,2}) de (\w+)", re.IGNORECASE)
 
 async def iniciar(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """/start: Saludo inicial."""
-    usuario = update.effective_user
-    await update.message.reply_html(
-        rf"¡Hola! ¿En qué puedo ayudarte hoy?"
-    )
+"""/start: Saludo inicial."""
+usuario = update.effective_user
+await update.message.reply_html(
+rf"¡Hola! ¿En qué puedo ayudarte hoy?"
+)
 
 async def ayuda(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """/ayuda: Proporciona información de ayuda."""
-    await update.message.reply_text(
-        "¿Necesitas ayuda sobre algo en especifico?. Solo hazmelo saber"
-    )
+"""/ayuda: Proporciona información de ayuda."""
+await update.message.reply_text(
+"¿Necesitas ayuda sobre algo en especifico?. Solo hazmelo saber"
+)
 
 async def responder_mensaje(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Responder a los mensajes del usuario basándose en los patrones detectados."""
-    if update.message and update.message.text:
-        mensaje = update.message.text
-        if expresion_consulta.search(mensaje):
-            await manejar_consulta(update)
-        else:
-            await update.message.reply_text("Lo siento, pero no entendí eso.")
-    else:
-        logger.warning("Mensaje inválido recibido: %s", update.message)
+"""Responder a los mensajes del usuario basándose en los patrones detectados."""
+if update.message and update.message.text:
+mensaje = update.message.text
+if expresion_consulta.search(mensaje):
+await manejar_consulta(update)
+else:
+await update.message.reply_text("Lo siento, pero no entendí eso.")
+else:
+logger.warning("Mensaje inválido recibido: %s", update.message)
 
 async def manejar_consulta(update: Update) -> None:
-    """Responder a las consultas detectadas."""
-    mensaje = update.message.text
-    if "Uber" in mensaje:
-        await update.message.reply_text("Entiendo que estás buscando información sobre Uber.")
-    else:
-        await update.message.reply_text("Entiendo que tienes una pregunta interesante.")
+"""Responder a las consultas detectadas."""
+mensaje = update.message.text
+if "Uber" in mensaje:
+await update.message.reply_text("Entiendo que estás buscando información sobre Uber.")
+else:
+await update.message.reply_text("Entiendo que tienes una pregunta interesante.")
 
 def main() -> None:
-    """Iniciar el bot y definir los manejadores de comandos y mensajes."""
-    application = Application.builder().token("7165798113:AAG9OwYYc3wwr6hOPv7ybus9pzBLSpHrDxI").build()  # Reemplazar TU_TOKEN con tu token real
+"""Iniciar el bot y definir los manejadores de comandos y mensajes."""
+application = Application.builder().token("7165798113:AAG9OwYYc3wwr6hOPv7ybus9pzBLSpHrDxI").build() 
 
-    # Agregar manejadores de comandos y mensajes
-    application.add_handler(CommandHandler("start", iniciar))
-    application.add_handler(CommandHandler("ayuda", ayuda))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, responder_mensaje))
+# Agregar manejadores de comandos y mensajes
+application.add_handler(CommandHandler("start", iniciar))
+application.add_handler(CommandHandler("ayuda", ayuda))
+application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, responder_mensaje))
 
-    # Iniciar el bot y escuchar los mensajes entrantes
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
-
+# Iniciar el bot y escuchar los mensajes entrantes
+application.run_polling(allowed_updates=Update.ALL_TYPES)
 if __name__ == "__main__":
-    main()
+main()
+```
