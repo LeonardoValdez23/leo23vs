@@ -17,7 +17,14 @@ Este proyecto es un bot de Telegram que te permite realizar consultas sobre Uber
 - `de`: Coincide con la palabra "de", que separa el día del mes y el mes en palabras.
 - `(\w+)`: Otro grupo que coincide con una o más letras, representando el mes en palabras en el que se realizará el viaje en Uber.
 
-![Captura de pantalla del bot](/Users/leonardovaldez/Documents/Leng. y Autom. I/Git-trabajos/tele-bot.png)
+
+
+
+![Captura de Bot funcionando](./tele-bot.png)
+
+
+
+
 
 
 ## Funcionalidades
