@@ -9,6 +9,7 @@
 
 ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\d\s]).{8,}$
 
+![Captura de Bot funcionando](./expresion1.png)
 
 
 
