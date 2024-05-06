@@ -3,7 +3,7 @@
 Ejemplo de aplicación de un autómata finito en el diseño de un sistema de control para una máquina expendedora de bebidas en un establecimiento.
 
 
-![Diagrama](./maquina-ex2.png)
+![Diagrama](/Imagenes-tema-3/maquina-ex2.png)
 
 
 ## Aplicación del autómata finito
@@ -25,6 +25,6 @@ El autómata finito se utiliza para modelar el comportamiento de la máquina exp
 - **Reiniciar:** Activada en caso de errores, lleva a la máquina al estado de "Reiniciando" para solucionar problemas.
 
 ## Diagrama de Estados y Transiciones
-![Diagrama](./maquina-expendedora.png)
+![Diagrama](/Imagenes-tema-3/maquina-expendedora.png)
 
 
